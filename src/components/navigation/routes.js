@@ -5,7 +5,7 @@ import Favorites from '../screens/Favorites/Favorites';
 
 const Routes = () => {
     return (
-        <div>
+        <div className="App">
             <Route path='/' exact component={Home}></Route>
             <Route path='/favorites' exact component={Favorites}></Route>
         </div>

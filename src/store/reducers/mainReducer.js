@@ -1,7 +1,8 @@
-import { GET_LOCATIONS } from '../actions/mainActions';
+import { GET_LOCATIONS, GET_FORECAST } from '../actions/mainActions';
 
 const initialState = {
     locations: [],
+    forecast: {},
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 locations: action.locations
+            }
+        case GET_FORECAST:
+            return {
+                ...state,
+                forecast: action.forecast
             }
         default:
             return state

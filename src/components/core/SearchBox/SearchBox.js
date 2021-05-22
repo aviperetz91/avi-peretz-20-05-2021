@@ -25,7 +25,7 @@ const SearchBox = () => {
         setSelected([]);
     }
 
-    // console.log("locations", locations)
+    console.log("locations", locations)
 
     return (
         <div>
