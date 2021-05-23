@@ -1,9 +1,15 @@
-import { GET_LOCATIONS, GET_FORECAST, SELECT_LOCATION } from '../actions/mainActions';
+import {
+    GET_LOCATIONS,
+    SELECT_LOCATION,
+    GET_CURRENT_WEATHER,
+    GET_FORECAST,
+} from '../actions/mainActions';
 import defaultLocation from '../../temp-data/defaultLocation';
 
 const initialState = {
     locations: [],
     selectedLocation: defaultLocation,
+    currentWeather: [],
     forecast: {},
 };
 
@@ -18,6 +24,11 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedLocation: action.location,
+            }
+        case GET_CURRENT_WEATHER:
+            return {
+                ...state,
+                currentWeather: action.currentWeather,
             }
         case GET_FORECAST:
             return {

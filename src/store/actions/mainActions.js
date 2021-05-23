@@ -2,10 +2,13 @@ import axios from 'axios';
 import { BASE_URL, API_KEY } from '../../config';
 import tempLocations from '../../temp-data/locations';
 import tempForecast from '../../temp-data/forecast';
+import tempCurrentWeather from '../../temp-data/currentWeather';
 
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const SELECT_LOCATION = 'SELECT_LOCATION';
+export const GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER';
 export const GET_FORECAST = 'GET_FORECAST';
+
 
 export const getLocations = (value) => {
     return async dispatch => {
@@ -18,6 +21,15 @@ export const getLocations = (value) => {
 
 export const selectLocation = (location) => {
     return { type: SELECT_LOCATION, location }
+}
+
+export const getCurrentWeather = (locationId) => {
+    return async dispatch => {
+        // const currentWeatherResponse = await axios.get(`${BASE_URL}/currentconditions/v1/${locationId}?apikey=${API_KEY}`)
+        // const currentWeather = currentWeatherResponse && currentWeatherResponse.data ? currentWeatherResponse.data : {}; 
+        // dispatch({ type: GET_CURRENT_WEATHER, currentWeather })
+        dispatch({ type: GET_CURRENT_WEATHER, currentWeather: tempCurrentWeather })
+    }
 }
 
 export const getForecast = (locationId) => {

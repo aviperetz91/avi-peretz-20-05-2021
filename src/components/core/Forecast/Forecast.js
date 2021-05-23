@@ -1,31 +1,36 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getForecast } from '../../../store/actions/mainActions';
+import { getCurrentWeather, getForecast } from '../../../store/actions/mainActions';
 import { IoHeartOutline as HeartOutlineIcon, IoHeartSharp as HeartIcon } from "react-icons/io5";
 import DailyForecast from './DailyForecast/DailyForecast';
 import { TEL_AVIV_ID, TEL_AVIV } from '../../../constants/consts';
+import weatherIcons from '../../../constants/weatherIcons';
 
 const Forecast = () => {
 
-    const { selectedLocation, forecast } = useSelector(state => state.main);
+    const { selectedLocation, currentWeather, forecast } = useSelector(state => state.main);
     const { Headline, DailyForecasts } = forecast;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(getCurrentWeather(TEL_AVIV_ID))
         dispatch(getForecast(TEL_AVIV_ID))
     }, [])
 
-    const requiredBool = Object.keys(forecast).length !== 0;
+    const requiredBool = Object.keys(forecast).length !== 0 && currentWeather.length > 0;
 
     if (requiredBool) {
         return (
             <div className="row justify-content-center mt-5">
                 <div className="col-11 border text-center p-3">
                     <div className="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h3>{ selectedLocation.length > 0 ? selectedLocation[0].LocalizedName : TEL_AVIV }</h3>
-                            <div></div>
+                        <div className="d-flex align-items-center">
+                            <img src={weatherIcons[currentWeather[0].WeatherIcon]} width="150px" />
+                            <div className="text-left">
+                                <h3>{selectedLocation.length > 0 ? selectedLocation[0].LocalizedName : TEL_AVIV}</h3>
+                                <div className="p-2">{`${currentWeather[0].Temperature.Imperial.Value} ${currentWeather[0].Temperature.Imperial.Unit}`}</div>
+                            </div>
                         </div>
                         <div><HeartOutlineIcon style={{ fontSize: 30 }} /></div>
                     </div>

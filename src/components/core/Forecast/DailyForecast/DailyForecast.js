@@ -12,7 +12,7 @@ const DailyForecast = props => {
         <div className="border p-2">
             <h5>{dayString}</h5>
             <div>{`${forecast.Temperature.Maximum.Value} / ${forecast.Temperature.Minimum.Value}`}</div>
-            <img src={weatherIcons[forecast.Day.Icon]} width="120px"></img>
+            <img src={weatherIcons[forecast.Day.Icon]} width="120px" />
             <div>{forecast.Day.IconPhrase}</div>
         </div>
     )
