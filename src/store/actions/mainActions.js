@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL, API_KEY } from '../../config';
-import tempLocations from '../../temp/locations';
-import tempForecast from '../../temp/forecast';
+import tempLocations from '../../temp-data/locations';
+import tempForecast from '../../temp-data/forecast';
 
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const SELECT_LOCATION = 'SELECT_LOCATION';

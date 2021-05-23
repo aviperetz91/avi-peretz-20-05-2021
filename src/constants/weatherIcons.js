@@ -40,7 +40,7 @@ import i43 from '../assets/images/43.png';
 import i44 from '../assets/images/44.png';
 
 
-const weatherIconsDictionary = {
+const weatherIcons = {
     '1': i1,
     '2': i2,
     '3': i3,
@@ -83,4 +83,4 @@ const weatherIconsDictionary = {
     '44': i44,
 }
 
-export default weatherIconsDictionary;
+export default weatherIcons;

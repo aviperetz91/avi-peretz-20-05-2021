@@ -3,36 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getForecast } from '../../../store/actions/mainActions';
 import { IoHeartOutline as HeartOutlineIcon, IoHeartSharp as HeartIcon } from "react-icons/io5";
 import DailyForecast from './DailyForecast/DailyForecast';
-
-const telAvivId = 215854; // Temp
+import { TEL_AVIV_ID, TEL_AVIV } from '../../../constants/consts';
 
 const Forecast = () => {
 
-    const { defaultLocation, selectedLocation, forecast } = useSelector(state => state.main);
+    const { selectedLocation, forecast } = useSelector(state => state.main);
     const { Headline, DailyForecasts } = forecast;
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getForecast(telAvivId))
+        dispatch(getForecast(TEL_AVIV_ID))
     }, [])
 
-    // console.log("Headline", Headline)
-    // console.log("DailyForecasts", DailyForecasts)
+    const requiredBool = Object.keys(forecast).length !== 0;
 
-    let location = defaultLocation;
-    if (selectedLocation.length > 0) {
-        location = selectedLocation
-    }
-
-    console.log("location", location)
-
-    if (Object.keys(forecast).length !== 0) {
+    if (requiredBool) {
         return (
             <div className="row justify-content-center mt-5">
-                <div className="col-10 border text-center p-3">
+                <div className="col-11 border text-center p-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <div>
-                            <h3>{location[0].LocalizedName}</h3>
+                            <h3>{ selectedLocation.length > 0 ? selectedLocation[0].LocalizedName : TEL_AVIV }</h3>
                             <div></div>
                         </div>
                         <div><HeartOutlineIcon style={{ fontSize: 30 }} /></div>
@@ -49,11 +41,7 @@ const Forecast = () => {
             </div>
         )
     } else {
-        return (
-            <div className="spinner-border text-dark" role="status">
-                <span className="sr-only">Loading...</span>
-            </div>
-        )
+        return null;
     }
 }
 

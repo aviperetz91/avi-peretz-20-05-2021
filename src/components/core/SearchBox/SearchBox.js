@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchBox.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocations, selectLocation, getForecast } from '../../../store/actions/mainActions';
@@ -7,7 +7,9 @@ import { IoSearch as SearchIcon, IoCloseOutline as CloseIcon } from "react-icons
 
 const SearchBox = () => {
 
-    const { locations, selectedLocation } = useSelector(state => state.main); 
+    const [tempSelected, setTempSelected] = useState([]);
+    const { locations } = useSelector(state => state.main);
+
     const dispatch = useDispatch();
 
     const handleChange = async value => {
@@ -15,32 +17,33 @@ const SearchBox = () => {
     }
 
     const handleSelect = location => {
-        // console.log(arrVal);
+        setTempSelected(location);
         dispatch(selectLocation(location));
-        dispatch(getForecast(location[0].Key));
+        if (location.length > 0) {
+            dispatch(getForecast(location[0].Key));
+        }
     }
 
     const handleClear = () => {
-        dispatch(selectLocation([]));
+        setTempSelected([]);
     }
 
-    // console.log("locations", locations)
-    // console.log("selectedLocation", selectedLocation)
-
     return (
-        <div>
-            <div className="input-icon-container input-search"> <SearchIcon /></div>
-            {selectedLocation.length > 0 && <div className="input-icon-container input-close pointer" onClick={handleClear}><CloseIcon /></div>}
-            <Typeahead
-                id="typeahead"
-                onChange={handleSelect}
-                onInputChange={handleChange}
-                labelKey={option => option.LocalizedName}
-                options={locations}
-                placeholder="Search..."
-                selected={selectedLocation}
-            />
-        </div >
+        <div className="row justify-content-center mt-5">
+            <div className="col-11 col-md-6 col-xl-5">
+                <div className="input-icon-container input-search"> <SearchIcon /></div>
+                {tempSelected.length > 0 && <div className="input-icon-container input-close pointer" onClick={handleClear}><CloseIcon /></div>}
+                <Typeahead
+                    id="typeahead"
+                    onChange={handleSelect}
+                    onInputChange={handleChange}
+                    labelKey={option => option.LocalizedName}
+                    options={locations}
+                    placeholder="Search..."
+                    selected={tempSelected}
+                />
+            </div >
+        </div>
     )
 }
 
