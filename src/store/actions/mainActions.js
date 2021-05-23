@@ -4,6 +4,7 @@ import tempLocations from '../../temp/locations';
 import tempForecast from '../../temp/forecast';
 
 export const GET_LOCATIONS = 'GET_LOCATIONS';
+export const SELECT_LOCATION = 'SELECT_LOCATION';
 export const GET_FORECAST = 'GET_FORECAST';
 
 export const getLocations = (value) => {
@@ -13,6 +14,10 @@ export const getLocations = (value) => {
         // dispatch({ type: GET_LOCATIONS, locations })
         dispatch({ type: GET_LOCATIONS, locations: tempLocations })
     }
+}
+
+export const selectLocation = (location) => {
+    return { type: SELECT_LOCATION, location }
 }
 
 export const getForecast = (locationId) => {
