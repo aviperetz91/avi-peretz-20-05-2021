@@ -4,6 +4,7 @@ import {
     GET_CURRENT_WEATHER,
     GET_FORECAST,
     TOGGLE_FAVORITE,
+    SET_PATH,
 } from '../actions/mainActions';
 import defaultLocation from '../../temp-data/defaultLocation';
 
@@ -12,7 +13,8 @@ const initialState = {
     selectedLocation: defaultLocation,
     currentWeather: [],
     forecast: {},
-    favorites: []
+    favorites: [],
+    path: window.location.pathname
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -42,6 +44,11 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 favorites: updatedFavorites,
+            }
+        case SET_PATH:
+            return {
+                ...state,
+                path: action.path,
             }
         default:
             return state

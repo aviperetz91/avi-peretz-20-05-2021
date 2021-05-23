@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPath } from '../../../store/actions/mainActions';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-    const [path, setPath] = useState(window.location.pathname);
+
+    const dispatch = useDispatch();
+
+    const { path } = useSelector(state => state.main);
+
+    const handlePathChange = (path) => {
+        dispatch(setPath(path))
+    } 
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,7 +26,7 @@ const Header = () => {
                         <Link 
                             to="/" 
                             className={classnames("nav-link", {'active': path === '/'})} 
-                            onClick={() => setPath("/")}
+                            onClick={() => handlePathChange("/")}
                         >
                             Home
                         </Link>
@@ -26,7 +35,7 @@ const Header = () => {
                         <Link 
                             to="/favorites" 
                             className={classnames("nav-link", {'active': path === '/favorites'})} 
-                            onClick={() => setPath("/favorites")}
+                            onClick={() => handlePathChange("/favorites")}
                         >
                             Favorites
                         </Link>

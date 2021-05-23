@@ -9,6 +9,7 @@ export const SELECT_LOCATION = 'SELECT_LOCATION';
 export const GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER';
 export const GET_FORECAST = 'GET_FORECAST';
 export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
+export const SET_PATH = 'SET_PATH';
 
 
 export const getLocations = (value) => {
@@ -18,10 +19,6 @@ export const getLocations = (value) => {
         // dispatch({ type: GET_LOCATIONS, locations })
         dispatch({ type: GET_LOCATIONS, locations: tempLocations })
     }
-}
-
-export const selectLocation = (location) => {
-    return { type: SELECT_LOCATION, location }
 }
 
 export const getCurrentWeather = (locationId) => {
@@ -42,6 +39,14 @@ export const getForecast = (locationId) => {
     }
 }
 
+export const selectLocation = (location) => {
+    return { type: SELECT_LOCATION, location }
+}
+
 export const toggleFavorite = (location) => {
     return { type: TOGGLE_FAVORITE, location }
+}
+
+export const setPath = (path) => {
+    return { type: SET_PATH, path }
 }

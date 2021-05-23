@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentWeather, getForecast, toggleFavorite } from '../../../store/actions/mainActions';
 import { IoHeartOutline as HeartOutlineIcon, IoHeartSharp as HeartIcon } from "react-icons/io5";
-import DailyForecast from './DailyForecast/DailyForecast';
+import WeatherBox from '../WeatherBox/WeatherBox';
 import { TEL_AVIV_ID, TEL_AVIV } from '../../../constants/consts';
 import weatherIcons from '../../../constants/weatherIcons';
 
@@ -14,8 +14,10 @@ const Forecast = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getCurrentWeather(TEL_AVIV_ID))
-        dispatch(getForecast(TEL_AVIV_ID))
+        if (currentWeather.length === 0 && Object.keys(forecast).length === 0) {
+            dispatch(getCurrentWeather(TEL_AVIV_ID))
+            dispatch(getForecast(TEL_AVIV_ID))        
+        }
     }, [])
 
     const handleHeartClick = () => {
@@ -28,7 +30,7 @@ const Forecast = () => {
     }
 
     const requiredBool = Object.keys(forecast).length !== 0 && currentWeather.length > 0;
-    const isFavorite = favorites.some(fav => fav.id === selectedLocation[0].Key);
+    const isFavorite = favorites.some(fav => selectedLocation.length > 0 && fav.id === selectedLocation[0].Key);
 
     if (requiredBool) {
         return (
@@ -47,11 +49,11 @@ const Forecast = () => {
                             : <HeartOutlineIcon style={{ fontSize: 30, color: 'red' }} /> }
                         </div>
                     </div>
-                    <h1>{Headline.Text}</h1>
+                    <h1>{currentWeather[0].WeatherText}</h1>
                     <div className="row justify-content-center">
                         {DailyForecasts.map((forecast, index) => (
                             <div key={index.toString()} className="col-10 mt-5 col-lg-2">
-                                <DailyForecast forecast={forecast} />
+                                <WeatherBox forecast={forecast} />
                             </div>
                         ))}
                     </div>
