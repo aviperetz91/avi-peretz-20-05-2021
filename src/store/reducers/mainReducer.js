@@ -3,6 +3,7 @@ import {
     SELECT_LOCATION,
     GET_CURRENT_WEATHER,
     GET_FORECAST,
+    TOGGLE_FAVORITE,
 } from '../actions/mainActions';
 import defaultLocation from '../../temp-data/defaultLocation';
 
@@ -11,6 +12,7 @@ const initialState = {
     selectedLocation: defaultLocation,
     currentWeather: [],
     forecast: {},
+    favorites: []
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -35,9 +37,26 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 forecast: action.forecast,
             }
+        case TOGGLE_FAVORITE:
+            const updatedFavorites = toggleFavorite(state.favorites, action.location)
+            return {
+                ...state,
+                favorites: updatedFavorites,
+            }
         default:
             return state
     }
+}
+
+const toggleFavorite = (favorites, newLocation) => {
+    const isFavorite = favorites.some(fav => fav.id === newLocation.id);
+    let updatedFavorites = [];
+    if (isFavorite) {
+        updatedFavorites = favorites.filter(fav => fav.id !== newLocation.id)
+    } else {
+        updatedFavorites = [...favorites, newLocation];
+    }
+    return updatedFavorites;
 }
 
 export default mainReducer;

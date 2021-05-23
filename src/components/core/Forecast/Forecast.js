@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentWeather, getForecast } from '../../../store/actions/mainActions';
+import { getCurrentWeather, getForecast, toggleFavorite } from '../../../store/actions/mainActions';
 import { IoHeartOutline as HeartOutlineIcon, IoHeartSharp as HeartIcon } from "react-icons/io5";
 import DailyForecast from './DailyForecast/DailyForecast';
 import { TEL_AVIV_ID, TEL_AVIV } from '../../../constants/consts';
@@ -8,7 +8,7 @@ import weatherIcons from '../../../constants/weatherIcons';
 
 const Forecast = () => {
 
-    const { selectedLocation, currentWeather, forecast } = useSelector(state => state.main);
+    const { selectedLocation, currentWeather, forecast, favorites } = useSelector(state => state.main);
     const { Headline, DailyForecasts } = forecast;
 
     const dispatch = useDispatch();
@@ -18,7 +18,17 @@ const Forecast = () => {
         dispatch(getForecast(TEL_AVIV_ID))
     }, [])
 
+    const handleHeartClick = () => {
+        const place = {
+            id: selectedLocation[0].Key,
+            name: selectedLocation[0].LocalizedName,
+            currentWeather: currentWeather
+        }
+        dispatch(toggleFavorite(place))
+    }
+
     const requiredBool = Object.keys(forecast).length !== 0 && currentWeather.length > 0;
+    const isFavorite = favorites.some(fav => fav.id === selectedLocation[0].Key);
 
     if (requiredBool) {
         return (
@@ -32,7 +42,10 @@ const Forecast = () => {
                                 <div className="p-2">{`${currentWeather[0].Temperature.Imperial.Value} ${currentWeather[0].Temperature.Imperial.Unit}`}</div>
                             </div>
                         </div>
-                        <div><HeartOutlineIcon style={{ fontSize: 30 }} /></div>
+                        <div className="pointer" onClick={handleHeartClick}>
+                            {isFavorite ? <HeartIcon style={{ fontSize: 30, color: 'red' }} />
+                            : <HeartOutlineIcon style={{ fontSize: 30, color: 'red' }} /> }
+                        </div>
                     </div>
                     <h1>{Headline.Text}</h1>
                     <div className="row justify-content-center">

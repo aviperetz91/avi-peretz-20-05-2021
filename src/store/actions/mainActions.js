@@ -8,6 +8,7 @@ export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const SELECT_LOCATION = 'SELECT_LOCATION';
 export const GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER';
 export const GET_FORECAST = 'GET_FORECAST';
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 
 
 export const getLocations = (value) => {
@@ -39,4 +40,8 @@ export const getForecast = (locationId) => {
         // dispatch({ type: GET_FORECAST, forecast })
         dispatch({ type: GET_FORECAST, forecast: tempForecast })
     }
+}
+
+export const toggleFavorite = (location) => {
+    return { type: TOGGLE_FAVORITE, location }
 }
