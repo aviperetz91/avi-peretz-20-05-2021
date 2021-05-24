@@ -6,7 +6,8 @@ import {
     TOGGLE_FAVORITE,
     SET_PATH,
     SET_THEME,
-    SET_UNIT
+    SET_UNIT,
+    SET_ERROR
 } from '../actions/mainActions';
 import { FAHRENHEIT_VALUE, DARK_VALUE } from '../../constants/consts';
 import defaultLocation from '../../temp-data/defaultLocation';
@@ -19,7 +20,8 @@ const initialState = {
     favorites: [],
     path: window.location.pathname,
     unit: FAHRENHEIT_VALUE,
-    theme: DARK_VALUE
+    theme: DARK_VALUE,
+    error: undefined
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -64,6 +66,11 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 unit: action.unit,
+            }
+        case SET_ERROR:
+            return {
+                ...state,
+                error: action.error,
             }
         default:
             return state
