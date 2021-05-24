@@ -10,7 +10,7 @@ const WeatherBox = props => {
     const dispatch = useDispatch();
 
     const handleFavoriteClick = () => {
-        dispatch(selectLocation([{ Key: favorite.id, LocalizedName: favorite.name }]))
+        dispatch(selectLocation([{ Key: favorite.id, LocalizedName: favorite.name, Country: favorite.Country }]))
         dispatch(getCurrentWeather(favorite.id));
         dispatch(getForecast(favorite.id));
         dispatch(setPath("/"))

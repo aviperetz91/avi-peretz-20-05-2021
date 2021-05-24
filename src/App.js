@@ -11,13 +11,13 @@ const App = () => {
 
   const { theme } = useSelector(state => state.main);
 
-  const background = {
+  const backgroundImg = {
     'dark': DarkBackground,
     'light': lightBackground
   }
     
   return (
-    <div className="App" style={{ backgroundImage: `url(${background[theme]})` }}>
+    <div className="App" style={{ backgroundImage: `url(${backgroundImg[theme]})` }}>
       <BrowserRouter>
         <Header />
         <Routes />

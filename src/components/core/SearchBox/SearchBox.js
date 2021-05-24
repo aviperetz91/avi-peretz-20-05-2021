@@ -12,7 +12,7 @@ const SearchBox = () => {
 
     const dispatch = useDispatch();
 
-    const handleChange = async value => {
+    const handleChange = value => {
         dispatch(getLocations(value))
     }
 

@@ -48,6 +48,7 @@ const WeatherDetails = () => {
                         currentWeather={currentWeather} 
                         selectedLocation={selectedLocation} 
                         favorites={favorites}
+                        theme={theme}
                     />
                     <FiveDaysForecast DailyForecasts={DailyForecasts}/>
                 </div>
