@@ -1,4 +1,3 @@
-import './WeatherDetails.css'
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentWeather, getForecast, toggleFavorite } from '../../../store/actions/mainActions';
@@ -43,7 +42,7 @@ const WeatherDetails = () => {
     if (requiredBool) {
         return (
             <div className="row justify-content-center mt-5">
-                <div className="forecast col-11 text-center p-3" style={styles[theme]}>
+                <div className="rounded col-11 text-center p-3" style={styles[theme]}>
                     <CurrentWeather 
                         currentWeather={currentWeather} 
                         selectedLocation={selectedLocation} 
