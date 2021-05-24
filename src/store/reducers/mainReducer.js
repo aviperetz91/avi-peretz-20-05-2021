@@ -5,6 +5,8 @@ import {
     GET_FORECAST,
     TOGGLE_FAVORITE,
     SET_PATH,
+    SET_THEME
+    
 } from '../actions/mainActions';
 import defaultLocation from '../../temp-data/defaultLocation';
 
@@ -14,7 +16,8 @@ const initialState = {
     currentWeather: [],
     forecast: {},
     favorites: [],
-    path: window.location.pathname
+    path: window.location.pathname,
+    theme: 'light'
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -49,6 +52,11 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 path: action.path,
+            }
+        case SET_THEME:
+            return {
+                ...state,
+                theme: action.theme,
             }
         default:
             return state

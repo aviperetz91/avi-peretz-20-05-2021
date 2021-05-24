@@ -10,7 +10,7 @@ const WeatherBox = props => {
     const dispatch = useDispatch();
 
     const handleFavoriteClick = () => {
-        dispatch(selectLocation([{ key: favorite.id, LocalizedName: favorite.name }]))
+        dispatch(selectLocation([{ Key: favorite.id, LocalizedName: favorite.name }]))
         dispatch(getCurrentWeather(favorite.id));
         dispatch(getForecast(favorite.id));
         dispatch(setPath("/"))
@@ -24,7 +24,7 @@ const WeatherBox = props => {
             <div className="border p-2">
                 <h5>{dayString}</h5>
                 <div>{`${forecast.Temperature.Maximum.Value} / ${forecast.Temperature.Minimum.Value}`}</div>
-                <img src={weatherIcons[forecast.Day.Icon]} width="120px" />
+                <img src={weatherIcons[forecast.Day.Icon]} width="100px" />
                 <div>{forecast.Day.IconPhrase}</div>
             </div>
         )

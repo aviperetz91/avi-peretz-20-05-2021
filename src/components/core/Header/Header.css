@@ -1,0 +1,22 @@
+.navbar-dark {
+    background-color: transparent;
+}
+
+.custom-dropdown-menu {
+    background-color: transparent;
+    border: none;
+}
+
+.custom-dropdown-item {
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.custom-dropdown-item:hover {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.custom-dropdown-item.active, .custom-dropdown-item:active {
+    background-color: transparent;
+}

@@ -9,7 +9,8 @@ export const SELECT_LOCATION = 'SELECT_LOCATION';
 export const GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER';
 export const GET_FORECAST = 'GET_FORECAST';
 export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
-export const SET_PATH = 'SET_PATH';
+export const SET_PATH = 'SET_PATH'; 
+export const SET_THEME = 'SET_THEME'; 
 
 
 export const getLocations = (value) => {
@@ -49,4 +50,8 @@ export const toggleFavorite = (location) => {
 
 export const setPath = (path) => {
     return { type: SET_PATH, path }
+}
+
+export const setTheme = (theme) => {
+    return { type: SET_THEME, theme }
 }
