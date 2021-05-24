@@ -6,12 +6,22 @@ import { toggleFavorite } from '../../../../store/actions/mainActions';
 import { TEL_AVIV, IL } from '../../../../constants/consts';
 import { fahrenheitToCelsius } from '../../../../helpers/helpers';
 import moment from 'moment';
+import { 
+    DARK_VALUE, 
+    DARK_TEXT_COLOR, 
+    LIGHT_VALUE, 
+    LIGHT_TEXT_COLOR,
+    HEART_ICON_SIZE,
+    HEART_ICON_COLOR, 
+    CELSIUS_VALUE,
+    DATE_FORMAT
+} from '../../../../constants/consts';
 
 const CurrentWeather = props => {
 
     const { currentWeather, selectedLocation, favorites, theme, unit } = props;
     const isFavorite = favorites.some(fav => selectedLocation.length > 0 && fav.id === selectedLocation[0].Key);
-    const currentDate = moment(currentWeather[0].LocalObservationDateTime).format('LLLL')
+    const currentDate = moment(currentWeather[0].LocalObservationDateTime).format(DATE_FORMAT)
 
     const dispatch = useDispatch();
 
@@ -27,9 +37,9 @@ const CurrentWeather = props => {
     }
 
     const renderHeartIcon = () => {
-        let heartIcon = <HeartOutlineIcon style={{ fontSize: 30, color: 'red' }} />
+        let heartIcon = <HeartOutlineIcon style={{ fontSize: HEART_ICON_SIZE, color: HEART_ICON_COLOR}} />
         if (isFavorite) {
-            heartIcon = <HeartIcon style={{ fontSize: 30, color: 'red' }} />
+            heartIcon = <HeartIcon style={{ fontSize: HEART_ICON_SIZE, color: HEART_ICON_COLOR }} />
         }
         return heartIcon;
     }
@@ -49,7 +59,7 @@ const CurrentWeather = props => {
                 <div className="display-4 font-weight-light">&#x2109;</div>
             </div>
         )
-        if (unit === 'C') {
+        if (unit === CELSIUS_VALUE) {
             temperature = (
                 <div className="d-flex align-items-center">
                     <div className="display-2">{`${fahrenheitToCelsius(currentWeather[0].Temperature.Imperial.Value)}`} </div>
@@ -60,13 +70,18 @@ const CurrentWeather = props => {
         return temperature;
     }
 
-    const textColor = {
-        'dark': 'white',
-        'white': 'black'
+    const getStyles = () => {
+        const styles = {};
+        if (theme === DARK_VALUE) {
+            styles.color = DARK_TEXT_COLOR;
+        } else if (theme === LIGHT_VALUE) {
+            styles.color = LIGHT_TEXT_COLOR;
+        }
+        return styles;
     }
 
     return (
-        <div style={{ color: textColor[theme] }}>
+        <div style={getStyles()}>
             <div className="d-flex align-items-center">
                 <div className="pointer text-left" onClick={handleHeartToggle}>
                     {renderHeartIcon()}
@@ -76,11 +91,11 @@ const CurrentWeather = props => {
                 </div>
             </div>
             <div className="row align-items-center">
-                <div className="text-center text-lg-left col-12 col-lg-6">
+                <div className="text-center pl-lg-2 pl-xl-4 text-lg-left col-12 col-lg-6">
                     {renderLocation()}
                     <h4 className="font-weight-light">{currentDate}</h4>
                 </div>
-                <div className="d-flex align-items-center col-12 col-lg-6 justify-content-end">
+                <div className="d-flex align-items-center col-12 col-lg-6 justify-content-center justify-content-lg-end ">
                     <div>
                         <img src={weatherIcons[currentWeather[0].WeatherIcon]} width="220px" />
                     </div>

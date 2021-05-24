@@ -4,12 +4,20 @@ import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPath, setTheme, setUnit } from '../../../store/actions/mainActions';
 import { Link } from 'react-router-dom';
+import { 
+    DARK_VALUE,
+    LIGHT_VALUE,
+    CELSIUS_VALUE,
+    FAHRENHEIT_VALUE,
+    HOME_PATH,
+    FAVORITES_PATH
+} from '../../../constants/consts';
 
 const Header = () => {
 
-    const dispatch = useDispatch();
-
     const { path, theme, unit } = useSelector(state => state.main);
+    
+    const dispatch = useDispatch();
 
     const handlePathChange = path => {
         dispatch(setPath(path))
@@ -34,8 +42,8 @@ const Header = () => {
                     <li className="nav-item">
                         <Link
                             to="/"
-                            className={classnames("nav-link", { 'active': path === '/' })}
-                            onClick={() => handlePathChange("/")}
+                            className={classnames("nav-link", { 'active': path === HOME_PATH })}
+                            onClick={() => handlePathChange(HOME_PATH)}
                         >
                             Home
                         </Link>
@@ -43,8 +51,8 @@ const Header = () => {
                     <li className="nav-item">
                         <Link
                             to="/favorites"
-                            className={classnames("nav-link", { 'active': path === '/favorites' })}
-                            onClick={() => handlePathChange("/favorites")}
+                            className={classnames("nav-link", { 'active': path === FAVORITES_PATH })}
+                            onClick={() => handlePathChange(FAVORITES_PATH)}
                         >
                             Favorites
                         </Link>
@@ -55,14 +63,14 @@ const Header = () => {
                         </a>
                         <div className="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
                             <a 
-                                onClick={() => handleUnitChange('F')}
-                                className={classnames("dropdown-item custom-dropdown-item", { 'active': unit === 'F' })}
+                                className={classnames("dropdown-item custom-dropdown-item", { 'active': unit === FAHRENHEIT_VALUE })}
+                                onClick={() => handleUnitChange(FAHRENHEIT_VALUE)}
                             >
                                 Fahrenheit
                             </a>
                             <a 
-                                onClick={() => handleUnitChange('C')}
-                                className={classnames("dropdown-item custom-dropdown-item", { 'active': unit === 'C' })}
+                                className={classnames("dropdown-item custom-dropdown-item", { 'active': unit === CELSIUS_VALUE })}
+                                onClick={() => handleUnitChange(CELSIUS_VALUE)}
                             >
                                 Celsius
                             </a>
@@ -74,14 +82,14 @@ const Header = () => {
                         </a>
                         <div className="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
                             <a 
-                                onClick={() => handleThemeChange('dark')}
-                                className={classnames("dropdown-item custom-dropdown-item", { 'active': theme === 'dark' })}
+                                className={classnames("dropdown-item custom-dropdown-item", { 'active': theme === DARK_VALUE })}
+                                onClick={() => handleThemeChange(DARK_VALUE)}
                             >
                                 Dark
                             </a>
                             <a 
-                                onClick={() => handleThemeChange('light')}
-                                className={classnames("dropdown-item custom-dropdown-item", { 'active': theme === 'light' })}
+                                className={classnames("dropdown-item custom-dropdown-item", { 'active': theme === LIGHT_VALUE })}
+                                onClick={() => handleThemeChange(LIGHT_VALUE)}
                             >
                                 Light
                             </a>

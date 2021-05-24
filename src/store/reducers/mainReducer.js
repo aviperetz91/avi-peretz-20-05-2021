@@ -7,8 +7,8 @@ import {
     SET_PATH,
     SET_THEME,
     SET_UNIT
-
 } from '../actions/mainActions';
+import { FAHRENHEIT_VALUE, DARK_VALUE } from '../../constants/consts';
 import defaultLocation from '../../temp-data/defaultLocation';
 
 const initialState = {
@@ -18,8 +18,8 @@ const initialState = {
     forecast: {},
     favorites: [],
     path: window.location.pathname,
-    unit: 'F',
-    theme: 'light'
+    unit: FAHRENHEIT_VALUE,
+    theme: DARK_VALUE
 };
 
 const mainReducer = (state = initialState, action) => {

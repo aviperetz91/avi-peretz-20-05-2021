@@ -4,6 +4,14 @@ import { getCurrentWeather, getForecast, toggleFavorite } from '../../../store/a
 import { TEL_AVIV_ID } from '../../../constants/consts';
 import CurrentWeather from '../WeatherDetails/CurrentWeather/CurrentWeather';
 import FiveDaysForecast from './FiveDaysForecast/FiveDaysForecast';
+import { 
+    DARK_VALUE,
+    DARK_BACKGROUND, 
+    DARK_SHADOW, 
+    LIGHT_VALUE,
+    LIGHT_BACKGROUND, 
+    LIGHT_SHADOW,
+} from '../../../constants/consts';
 
 const WeatherDetails = () => {
 
@@ -27,15 +35,16 @@ const WeatherDetails = () => {
         }
     }, [])
 
-    const styles = {
-        'dark': {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            boxShadow: '0px 3px 15px 5px #000000'
-        },
-        'light': {
-            backgroundColor: 'rgba(255, 255, 255, 0.5)',
-            boxShadow: '0px 3px 15px 5px #d7d7d7'
+    const getStyles = () => {
+        const styles = {}
+        if (theme === DARK_VALUE) {
+            styles.backgroundColor = DARK_BACKGROUND;
+            styles.boxShadow = DARK_SHADOW;
+        } else if (theme === LIGHT_VALUE) {
+            styles.backgroundColor = LIGHT_BACKGROUND;
+            styles.boxShadow = LIGHT_SHADOW;
         }
+        return styles;
     }
 
     const requiredBool = Object.keys(forecast).length !== 0 && currentWeather.length > 0;
@@ -43,7 +52,7 @@ const WeatherDetails = () => {
     if (requiredBool) {
         return (
             <div className="row justify-content-center mt-5">
-                <div className="rounded col-11 text-center p-3" style={styles[theme]}>
+                <div className="rounded col-11 text-center p-3" style={getStyles()}>
                     <CurrentWeather 
                         currentWeather={currentWeather} 
                         selectedLocation={selectedLocation} 

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SearchBox from '../../core/SearchBox/SearchBox';
 import WeatherDetails from '../../core/WeatherDetails/WeatherDetails';
 
 const Home = () => {
     return (
-        <div>
+        <Fragment>
             <SearchBox />
             <WeatherDetails />
-        </div>
+        </Fragment>
     )
 }
 
