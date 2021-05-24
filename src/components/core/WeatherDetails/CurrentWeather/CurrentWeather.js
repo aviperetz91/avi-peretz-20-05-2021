@@ -43,8 +43,8 @@ const CurrentWeather = props => {
                     {isFavorite ? 'Remove from Favorites' : 'Add To Favorites'}
                 </div>
             </div>
-            <div className="d-flex justify-content-between align-items-center">
-                <div className="text-left">
+            <div className="row align-items-center">
+                <div className="text-center text-lg-left col-12 col-lg-6">
                     {selectedLocation.length > 0 ? 
                         <h1 className="m-0 display-4">{`${selectedLocation[0].LocalizedName}, ${selectedLocation[0].Country.ID}`}</h1>
                     :
@@ -52,7 +52,7 @@ const CurrentWeather = props => {
                     }
                     <h4 className="font-weight-light">{currentDate}</h4>
                 </div>
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center col-12 col-lg-6 justify-content-end">
                     <div>
                         <img src={weatherIcons[currentWeather[0].WeatherIcon]} width="220px" />
                     </div>
