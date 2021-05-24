@@ -1,0 +1,52 @@
+.box-container {
+    cursor: pointer;
+}
+
+.day-text-container {
+    padding: 16px 0;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-bottom: 4px;
+
+}
+
+.day-text {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.temperature-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.temperature-cube {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 49%;
+    padding: 12px;
+}
+
+.temperature-text {
+    font-weight: normal;
+    font-size: 34px;
+}
+
+.weather-icon-container {
+    padding: 8px 0;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.weather-icon-text {
+    font-weight: 500;
+}
+
+.temperature-rect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+}
