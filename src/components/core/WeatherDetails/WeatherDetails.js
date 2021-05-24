@@ -12,10 +12,11 @@ const WeatherDetails = () => {
         currentWeather, 
         forecast, 
         favorites, 
-        theme 
+        theme,
+        unit, 
     } = useSelector(state => state.main);
     
-    const { Headline, DailyForecasts } = forecast;
+    const { DailyForecasts } = forecast;
 
     const dispatch = useDispatch();
 
@@ -48,6 +49,7 @@ const WeatherDetails = () => {
                         selectedLocation={selectedLocation} 
                         favorites={favorites}
                         theme={theme}
+                        unit={unit}
                     />
                     <FiveDaysForecast DailyForecasts={DailyForecasts}/>
                 </div>

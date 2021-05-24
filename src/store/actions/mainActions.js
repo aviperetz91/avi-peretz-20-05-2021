@@ -11,6 +11,7 @@ export const GET_FORECAST = 'GET_FORECAST';
 export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 export const SET_PATH = 'SET_PATH'; 
 export const SET_THEME = 'SET_THEME'; 
+export const SET_UNIT = 'SET_UNIT'; 
 
 
 export const getLocations = (value) => {
@@ -54,4 +55,8 @@ export const setPath = (path) => {
 
 export const setTheme = (theme) => {
     return { type: SET_THEME, theme }
+}
+
+export const setUnit = (unit) => {
+    return { type: SET_UNIT, unit }
 }

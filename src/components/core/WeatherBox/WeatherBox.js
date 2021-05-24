@@ -1,14 +1,15 @@
 import './WeatherBox.css';
 import React from 'react';
 import moment from 'moment';
-import weatherIcons from '../../../constants/weatherIcons';
+import { weatherIcons } from '../../../helpers/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPath, selectLocation, getCurrentWeather, getForecast } from '../../../store/actions/mainActions';
+import { fahrenheitToCelsius } from '../../../helpers/helpers';
 
 const WeatherBox = props => {
 
     const { forecast, favorite, history } = props;
-    const { theme } = useSelector(state => state.main);
+    const { theme, unit } = useSelector(state => state.main);
     const dispatch = useDispatch();
 
     const handleFavoriteClick = () => {
@@ -17,6 +18,55 @@ const WeatherBox = props => {
         dispatch(getForecast(favorite.id));
         dispatch(setPath("/"))
         history.push("/")
+    }
+
+    const renderMinMaxTemperature = () => {
+        let row = (
+            <div className="temperature-row">
+                <div className="temperature-cube" style={styles[theme]}>
+                    <div className="temperature-text">{forecast.Temperature.Maximum.Value}</div>
+                    <div>&#x2109;</div>
+                </div>
+                <div className="temperature-cube" style={styles[theme]}>
+                    <div className="temperature-text">{forecast.Temperature.Minimum.Value}</div>
+                    <div>&#x2109;</div>
+                </div>
+            </div>
+        )
+        if (unit === 'C') {
+            row = (
+                <div className="temperature-row">
+                    <div className="temperature-cube" style={styles[theme]}>
+                        <div className="temperature-text">{fahrenheitToCelsius(forecast.Temperature.Maximum.Value)}</div>
+                        <div>&#x2103;</div>
+                    </div>
+                    <div className="temperature-cube" style={styles[theme]}>
+                        <div className="temperature-text">{fahrenheitToCelsius(forecast.Temperature.Minimum.Value)}</div>
+                        <div>&#x2103;</div>
+                    </div>
+                </div>
+
+            )
+        }
+        return row;
+    }
+
+    const renderSingleTemperature = () => {
+        let row = (
+            <div className="temperature-rect m-0" style={styles[theme]}>
+                <div className="temperature-text">{favorite.currentWeather[0].Temperature.Imperial.Value}</div>
+                <div>&#x2109;</div>
+            </div>
+        )
+        if (unit === 'C') {
+            row = (
+                <div className="temperature-rect m-0" style={styles[theme]}>
+                    <div className="temperature-text">{fahrenheitToCelsius(favorite.currentWeather[0].Temperature.Imperial.Value)}</div>
+                    <div>&#x2103;</div>
+                </div>
+            )
+        }
+        return row;
     }
 
     const styles = {
@@ -38,16 +88,7 @@ const WeatherBox = props => {
                 <div className="day-text-container" style={styles[theme]}>
                     <h5 className="day-text">{dayString}</h5>
                 </div>
-                <div className="temperature-row">
-                    <div className="temperature-cube" style={styles[theme]}>
-                        <div className="temperature-text">{forecast.Temperature.Maximum.Value}</div>
-                        <div>&#x2109;</div>
-                    </div>
-                    <div className="temperature-cube" style={styles[theme]}>
-                        <div className="temperature-text">{forecast.Temperature.Minimum.Value}</div>
-                        <div>&#x2109;</div>
-                    </div>
-                </div>
+                {renderMinMaxTemperature()}
                 <div className="weather-icon-container" style={styles[theme]}>
                     <img src={weatherIcons[forecast.Day.Icon]} width="120px" />
                     <div className="weather-icon-text">{forecast.Day.IconPhrase}</div>
@@ -60,10 +101,7 @@ const WeatherBox = props => {
                 <div className="day-text-container m-0" style={styles[theme]}>
                     <h5 className="day-text">{favorite.name}</h5>
                 </div>
-                <div className="temperature-rect m-0" style={styles[theme]}>
-                    <div className="temperature-text">{favorite.currentWeather[0].Temperature.Imperial.Value}</div>
-                    <div className="temperature-text">&#x2109;</div>
-                </div>
+                {renderSingleTemperature()}
                 <div className="weather-icon-container" style={styles[theme]}>
                     <img src={weatherIcons[favorite.currentWeather[0].WeatherIcon]} width="120px" />
                     <div className="weather-icon-text">{favorite.currentWeather[0].WeatherText}</div>

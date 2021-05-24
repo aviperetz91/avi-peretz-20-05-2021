@@ -2,21 +2,25 @@ import './Header.css'
 import React from 'react';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPath, setTheme } from '../../../store/actions/mainActions';
+import { setPath, setTheme, setUnit } from '../../../store/actions/mainActions';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     const dispatch = useDispatch();
 
-    const { path, theme } = useSelector(state => state.main);
+    const { path, theme, unit } = useSelector(state => state.main);
 
-    const handlePathChange = (path) => {
+    const handlePathChange = path => {
         dispatch(setPath(path))
     }
 
-    const handleThemeChange = (theme) => {
+    const handleThemeChange = theme => {
         dispatch(setTheme(theme))
+    }
+
+    const handleUnitChange = unit => {
+        dispatch(setUnit(unit))
     }
 
     return (
@@ -47,7 +51,26 @@ const Header = () => {
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            Units
+                        </a>
+                        <div className="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a 
+                                onClick={() => handleUnitChange('F')}
+                                className={classnames("dropdown-item custom-dropdown-item", { 'active': unit === 'F' })}
+                            >
+                                Fahrenheit
+                            </a>
+                            <a 
+                                onClick={() => handleUnitChange('C')}
+                                className={classnames("dropdown-item custom-dropdown-item", { 'active': unit === 'C' })}
+                            >
+                                Celsius
+                            </a>
+                        </div>
+                    </li>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Theme
                         </a>
                         <div className="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
                             <a 

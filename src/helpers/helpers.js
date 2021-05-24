@@ -40,7 +40,7 @@ import i43 from '../assets/images/43.png';
 import i44 from '../assets/images/44.png';
 
 
-const weatherIcons = {
+export const weatherIcons = {
     '1': i1,
     '2': i2,
     '3': i3,
@@ -83,4 +83,8 @@ const weatherIcons = {
     '44': i44,
 }
 
-export default weatherIcons;
+export const fahrenheitToCelsius = fahrenheit => {
+    const celsius = (fahrenheit -32) * 5/9;
+    return celsius.toFixed(0).toString()
+}
+
