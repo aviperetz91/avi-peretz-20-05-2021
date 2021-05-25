@@ -7,29 +7,24 @@ import tempCurrentWeather from '../../temp-data/currentWeather';
 
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const SELECT_LOCATION = 'SELECT_LOCATION';
-export const GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER';
-export const GET_FORECAST = 'GET_FORECAST';
 export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 export const SET_PATH = 'SET_PATH';
 export const SET_THEME = 'SET_THEME';
 export const SET_UNIT = 'SET_UNIT';
 export const SET_ERROR = 'SET_ERROR';
-export const GET_CURRENT_LOCATION = 'GET_CURRENT_LOCATION';
-
 
 export const getCurrentLocation = (lat, lon) => {
     return async dispatch => {
         try {
-            // const currentLocationResponse = await axios.get(`${BASE_URL}/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${lat},${lon}`)
-            // const currentLocation = currentLocationResponse && currentLocationResponse.data ? currentLocationResponse.data : [];
-            // const currentWeatherResponse = await axios.get(`${BASE_URL}/currentconditions/v1/${currentLocation.Key}?apikey=${API_KEY}`);
-            // const currentWeather = currentWeatherResponse && currentWeatherResponse.data ? currentWeatherResponse.data : {};
-            // const forecastResponse = await axios.get(`${BASE_URL}/forecasts/v1/daily/5day/${currentLocation.Key}?apikey=${API_KEY}`)
-            // const forecast = forecastResponse && forecastResponse.data ? forecastResponse.data : {};
-            // dispatch({ type: GET_CURRENT_LOCATION, location: [currentLocation], currentWeather, forecast})
-            dispatch({ type: SELECT_LOCATION, location: defaultLocation, currentWeather: tempCurrentWeather, forecast: tempForecast })
+            const currentLocationResponse = await axios.get(`${BASE_URL}/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${lat},${lon}`)
+            const currentLocation = currentLocationResponse && currentLocationResponse.data ? currentLocationResponse.data : [];
+            const currentWeatherResponse = await axios.get(`${BASE_URL}/currentconditions/v1/${currentLocation.Key}?apikey=${API_KEY}`);
+            const currentWeather = currentWeatherResponse && currentWeatherResponse.data ? currentWeatherResponse.data : {};
+            const forecastResponse = await axios.get(`${BASE_URL}/forecasts/v1/daily/5day/${currentLocation.Key}?apikey=${API_KEY}`)
+            const forecast = forecastResponse && forecastResponse.data ? forecastResponse.data : {};
+            dispatch({ type: SELECT_LOCATION, location: [currentLocation], currentWeather, forecast})
+            // dispatch({ type: SELECT_LOCATION, location: defaultLocation, currentWeather: tempCurrentWeather, forecast: tempForecast })
         } catch (error) {
-            console.log(error.Message)
             dispatch({ type: SET_ERROR, error: error.Message })
         }
     }
@@ -38,10 +33,10 @@ export const getCurrentLocation = (lat, lon) => {
 export const getLocations = (value) => {
     return async dispatch => {
         try {
-            // const locationsResponse = await axios.get(`${BASE_URL}/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${value}`)
-            // const locations = locationsResponse && locationsResponse.data ? locationsResponse.data : [];
-            // dispatch({ type: GET_LOCATIONS, locations })
-            dispatch({ type: GET_LOCATIONS, locations: tempLocations })
+            const locationsResponse = await axios.get(`${BASE_URL}/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${value}`)
+            const locations = locationsResponse && locationsResponse.data ? locationsResponse.data : [];
+            dispatch({ type: GET_LOCATIONS, locations })
+            // dispatch({ type: GET_LOCATIONS, locations: tempLocations })
         } catch (error) {
             dispatch({ type: SET_ERROR, error: error.Message })
         }
@@ -51,12 +46,12 @@ export const getLocations = (value) => {
 export const selectLocation = (location) => {
     return async dispatch => {
         try {
-            // const currentWeatherResponse = await axios.get(`${BASE_URL}/currentconditions/v1/${location[0].Key}?apikey=${API_KEY}`)
-            // const currentWeather = currentWeatherResponse && currentWeatherResponse.data ? currentWeatherResponse.data : {};
-            // const forecastResponse = await axios.get(`${BASE_URL}/forecasts/v1/daily/5day/${location[0].Key}?apikey=${API_KEY}`)
-            // const forecast = forecastResponse && forecastResponse.data ? forecastResponse.data : {};
-            // dispatch({ type: SELECT_LOCATION, location, currentWeather, forecast })
-            dispatch({ type: SELECT_LOCATION, location, currentWeather: tempCurrentWeather, forecast: tempForecast })
+            const currentWeatherResponse = await axios.get(`${BASE_URL}/currentconditions/v1/${location[0].Key}?apikey=${API_KEY}`)
+            const currentWeather = currentWeatherResponse && currentWeatherResponse.data ? currentWeatherResponse.data : {};
+            const forecastResponse = await axios.get(`${BASE_URL}/forecasts/v1/daily/5day/${location[0].Key}?apikey=${API_KEY}`)
+            const forecast = forecastResponse && forecastResponse.data ? forecastResponse.data : {};
+            dispatch({ type: SELECT_LOCATION, location, currentWeather, forecast })
+            // dispatch({ type: SELECT_LOCATION, location, currentWeather: tempCurrentWeather, forecast: tempForecast })
         } catch (error) {
             dispatch({ type: SET_ERROR, error: error.Message })
         }

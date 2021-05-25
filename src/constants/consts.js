@@ -19,5 +19,3 @@ export const HOME_PATH = '/';
 export const FAVORITES_PATH = '/favorites';
 export const DAY_FORMAY = 'dddd';
 export const DATE_FORMAT = 'LLLL';
-// export const 
-// export const 

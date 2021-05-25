@@ -72,7 +72,11 @@ const WeatherDetails = () => {
             </div>
         )
     } else {
-        return null;
+        return (
+            <div className="d-flex justify-content-center align-items-center mt-5">
+                <div class="spinner-border text-warning" role="status"></div>
+            </div>
+        );
     }
 }
 
