@@ -1,20 +1,17 @@
 import {
     GET_LOCATIONS,
     SELECT_LOCATION,
-    GET_CURRENT_WEATHER,
-    GET_FORECAST,
     TOGGLE_FAVORITE,
     SET_PATH,
     SET_THEME,
     SET_UNIT,
-    SET_ERROR
+    SET_ERROR,
 } from '../actions/mainActions';
 import { FAHRENHEIT_VALUE, DARK_VALUE } from '../../constants/consts';
-import defaultLocation from '../../temp-data/defaultLocation';
 
 const initialState = {
     locations: [],
-    selectedLocation: defaultLocation,
+    selectedLocation: [],
     currentWeather: [],
     forecast: {},
     favorites: [],
@@ -35,16 +32,8 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedLocation: action.location,
-            }
-        case GET_CURRENT_WEATHER:
-            return {
-                ...state,
                 currentWeather: action.currentWeather,
-            }
-        case GET_FORECAST:
-            return {
-                ...state,
-                forecast: action.forecast,
+                forecast: action.forecast
             }
         case TOGGLE_FAVORITE:
             const updatedFavorites = toggleFavorite(state.favorites, action.location)

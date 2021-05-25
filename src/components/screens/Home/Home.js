@@ -12,8 +12,8 @@ const Home = () => {
             <SearchBox />
             <WeatherDetails />
             {error && <div className="row justify-content-center">
-                <div class="mt-5 col-5 alert alert-danger text-center" role="alert">
-                    Somthing went wrong, please try again in few minutes
+                <div className="mt-5 col-5 alert alert-danger text-center" role="alert">
+                    {error}
                 </div>
             </div>}
         </Fragment>

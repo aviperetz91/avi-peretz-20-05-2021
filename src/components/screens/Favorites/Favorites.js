@@ -16,19 +16,6 @@ const Favorites = props => {
 
     const { favorites, theme } = useSelector(state => state.main);
 
-    const styles = {
-        'dark': {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            boxShadow: '0px 3px 15px 5px #000000',
-            color: 'white',
-        },
-        'light': {
-            backgroundColor: 'rgba(255, 255, 255, 0.5)',
-            boxShadow: '0px 3px 15px 5px #d7d7d7',
-            color: 'black'
-        }
-    }
-
     const getStyles = () => {
         const styles = {}
         if (theme === DARK_VALUE) {

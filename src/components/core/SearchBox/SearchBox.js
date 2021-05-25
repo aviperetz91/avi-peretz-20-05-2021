@@ -1,7 +1,7 @@
 import './SearchBox.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocations, selectLocation, getCurrentWeather, getForecast } from '../../../store/actions/mainActions';
+import { getLocations, selectLocation } from '../../../store/actions/mainActions';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { IoSearch as SearchIcon, IoCloseOutline as CloseIcon } from "react-icons/io5";
 
@@ -18,10 +18,8 @@ const SearchBox = () => {
 
     const handleSelect = location => {
         setTempSelected(location);
-        dispatch(selectLocation(location));
         if (location.length > 0) {
-            dispatch(getCurrentWeather(location[0].Key))
-            dispatch(getForecast(location[0].Key));
+            dispatch(selectLocation(location));
         }
     }
 

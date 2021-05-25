@@ -1,39 +1,46 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentWeather, getForecast, toggleFavorite } from '../../../store/actions/mainActions';
-import { TEL_AVIV_ID } from '../../../constants/consts';
+import { getCurrentLocation, setError } from '../../../store/actions/mainActions';
 import CurrentWeather from '../WeatherDetails/CurrentWeather/CurrentWeather';
 import FiveDaysForecast from './FiveDaysForecast/FiveDaysForecast';
-import { 
+import {
     DARK_VALUE,
-    DARK_BACKGROUND, 
-    DARK_SHADOW, 
+    DARK_BACKGROUND,
+    DARK_SHADOW,
     LIGHT_VALUE,
-    LIGHT_BACKGROUND, 
+    LIGHT_BACKGROUND,
     LIGHT_SHADOW,
 } from '../../../constants/consts';
 
 const WeatherDetails = () => {
 
-    const { 
-        selectedLocation, 
-        currentWeather, 
-        forecast, 
-        favorites, 
+    const {
+        selectedLocation,
+        currentWeather,
+        forecast,
+        favorites,
         theme,
-        unit, 
+        unit,
     } = useSelector(state => state.main);
-    
+
     const { DailyForecasts } = forecast;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (currentWeather.length === 0 && Object.keys(forecast).length === 0) {
-            dispatch(getCurrentWeather(TEL_AVIV_ID))
-            dispatch(getForecast(TEL_AVIV_ID))        
+        if (selectedLocation.length === 0) {
+            navigator.geolocation.getCurrentPosition(onSccess, onError)
         }
     }, [])
+
+    const onSccess = (position) => {
+        const { latitude, longitude } = position.coords;
+        dispatch(getCurrentLocation(latitude, longitude))
+    }
+
+    const onError = (error) => {
+        dispatch(setError(error))
+    }
 
     const getStyles = () => {
         const styles = {}
@@ -53,14 +60,14 @@ const WeatherDetails = () => {
         return (
             <div className="row justify-content-center mt-5">
                 <div className="rounded col-11 text-center p-3" style={getStyles()}>
-                    <CurrentWeather 
-                        currentWeather={currentWeather} 
-                        selectedLocation={selectedLocation} 
+                    <CurrentWeather
+                        currentWeather={currentWeather}
+                        selectedLocation={selectedLocation}
                         favorites={favorites}
                         theme={theme}
                         unit={unit}
                     />
-                    <FiveDaysForecast DailyForecasts={DailyForecasts}/>
+                    <FiveDaysForecast DailyForecasts={DailyForecasts} />
                 </div>
             </div>
         )

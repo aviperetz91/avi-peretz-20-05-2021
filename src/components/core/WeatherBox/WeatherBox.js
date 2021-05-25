@@ -2,7 +2,7 @@ import './WeatherBox.css';
 import React from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPath, selectLocation, getCurrentWeather, getForecast } from '../../../store/actions/mainActions';
+import { setPath, selectLocation } from '../../../store/actions/mainActions';
 import { weatherIcons, fahrenheitToCelsius } from '../../../helpers/helpers';
 import { 
     DARK_VALUE,
@@ -24,8 +24,6 @@ const WeatherBox = props => {
 
     const handleFavoriteClick = () => {
         dispatch(selectLocation([{ Key: favorite.id, LocalizedName: favorite.name, Country: favorite.Country }]))
-        dispatch(getCurrentWeather(favorite.id));
-        dispatch(getForecast(favorite.id));
         dispatch(setPath(HOME_PATH))
         history.push(HOME_PATH)
     }
