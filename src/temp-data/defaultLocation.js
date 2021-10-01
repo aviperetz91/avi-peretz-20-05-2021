@@ -1,19 +1,19 @@
 const defaultLocation = [
     {
         Version: 1,
-        Key: "215854",
-        Type: "City",
+        Key: '215854',
+        Type: 'City',
         Rank: 31,
-        LocalizedName: "Tel Aviv",
+        LocalizedName: 'Tel Aviv',
         Country: {
-            ID: "IL",
-            LocalizedName: "Israel",
+            ID: 'IL',
+            LocalizedName: 'Israel',
         },
         AdministrativeArea: {
-            ID: "TA",
-            LocalizedName: "Tel Aviv",
+            ID: 'TA',
+            LocalizedName: 'Tel Aviv',
         },
     },
-]
+];
 
 export default defaultLocation;

@@ -1,23 +1,23 @@
 .rbt-input-main {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: #ced4da !important;
-  padding-left: 30px;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #ced4da !important;
+    padding-left: 30px;
 }
-  
+
 .input-icon-container {
-  position: absolute;
-  z-index: 10;
-  top: 5px;
+    position: absolute;
+    z-index: 10;
+    top: 5px;
 }
 
 .input-search {
-  top: 5px;
-  left: 25px;
+    top: 5px;
+    left: 25px;
 }
 
 .input-close {
-  right: 20px;
+    right: 20px;
 }
 
 .pointer {

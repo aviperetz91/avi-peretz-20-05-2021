@@ -17,6 +17,7 @@
     color: rgba(255, 255, 255, 0.75);
 }
 
-.custom-dropdown-item.active, .custom-dropdown-item:active {
+.custom-dropdown-item.active,
+.custom-dropdown-item:active {
     background-color: transparent;
 }

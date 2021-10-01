@@ -18,7 +18,7 @@ const initialState = {
     path: window.location.pathname,
     unit: FAHRENHEIT_VALUE,
     theme: DARK_VALUE,
-    error: undefined
+    error: undefined,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -27,54 +27,57 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 locations: action.locations,
-            }
+            };
         case SELECT_LOCATION:
             return {
                 ...state,
                 selectedLocation: action.location,
                 currentWeather: action.currentWeather,
-                forecast: action.forecast
-            }
+                forecast: action.forecast,
+            };
         case TOGGLE_FAVORITE:
-            const updatedFavorites = toggleFavorite(state.favorites, action.location)
+            const updatedFavorites = toggleFavorite(
+                state.favorites,
+                action.location
+            );
             return {
                 ...state,
                 favorites: updatedFavorites,
-            }
+            };
         case SET_PATH:
             return {
                 ...state,
                 path: action.path,
-            }
+            };
         case SET_THEME:
             return {
                 ...state,
                 theme: action.theme,
-            }
+            };
         case SET_UNIT:
             return {
                 ...state,
                 unit: action.unit,
-            }
+            };
         case SET_ERROR:
             return {
                 ...state,
                 error: action.error,
-            }
+            };
         default:
-            return state
+            return state;
     }
-}
+};
 
 const toggleFavorite = (favorites, newLocation) => {
-    const isFavorite = favorites.some(fav => fav.id === newLocation.id);
+    const isFavorite = favorites.some((fav) => fav.id === newLocation.id);
     let updatedFavorites = [];
     if (isFavorite) {
-        updatedFavorites = favorites.filter(fav => fav.id !== newLocation.id)
+        updatedFavorites = favorites.filter((fav) => fav.id !== newLocation.id);
     } else {
         updatedFavorites = [...favorites, newLocation];
     }
     return updatedFavorites;
-}
+};
 
 export default mainReducer;

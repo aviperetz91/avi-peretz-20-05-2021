@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentLocation, setError } from '../../../store/actions/mainActions';
+import {
+    getCurrentLocation,
+    setError,
+} from '../../../store/actions/mainActions';
 import CurrentWeather from '../WeatherDetails/CurrentWeather/CurrentWeather';
 import FiveDaysForecast from './FiveDaysForecast/FiveDaysForecast';
 import {
@@ -13,7 +16,6 @@ import {
 } from '../../../constants/consts';
 
 const WeatherDetails = () => {
-
     const {
         selectedLocation,
         currentWeather,
@@ -21,7 +23,7 @@ const WeatherDetails = () => {
         favorites,
         theme,
         unit,
-    } = useSelector(state => state.main);
+    } = useSelector((state) => state.main);
 
     const { DailyForecasts } = forecast;
 
@@ -29,21 +31,21 @@ const WeatherDetails = () => {
 
     useEffect(() => {
         if (selectedLocation.length === 0) {
-            navigator.geolocation.getCurrentPosition(onSccess, onError)
+            navigator.geolocation.getCurrentPosition(onSccess, onError);
         }
-    }, [])
+    }, []);
 
     const onSccess = (position) => {
         const { latitude, longitude } = position.coords;
-        dispatch(getCurrentLocation(latitude, longitude))
-    }
+        dispatch(getCurrentLocation(latitude, longitude));
+    };
 
     const onError = (error) => {
-        dispatch(setError(error))
-    }
+        dispatch(setError(error));
+    };
 
     const getStyles = () => {
-        const styles = {}
+        const styles = {};
         if (theme === DARK_VALUE) {
             styles.backgroundColor = DARK_BACKGROUND;
             styles.boxShadow = DARK_SHADOW;
@@ -52,14 +54,18 @@ const WeatherDetails = () => {
             styles.boxShadow = LIGHT_SHADOW;
         }
         return styles;
-    }
+    };
 
-    const requiredBool = Object.keys(forecast).length !== 0 && currentWeather.length > 0;
+    const requiredBool =
+        Object.keys(forecast).length !== 0 && currentWeather.length > 0;
 
     if (requiredBool) {
         return (
-            <div className="row justify-content-center mt-5">
-                <div className="rounded col-11 text-center p-3" style={getStyles()}>
+            <div className='row justify-content-center mt-5'>
+                <div
+                    className='rounded col-11 text-center p-3'
+                    style={getStyles()}
+                >
                     <CurrentWeather
                         currentWeather={currentWeather}
                         selectedLocation={selectedLocation}
@@ -70,14 +76,14 @@ const WeatherDetails = () => {
                     <FiveDaysForecast DailyForecasts={DailyForecasts} />
                 </div>
             </div>
-        )
+        );
     } else {
         return (
-            <div className="d-flex justify-content-center align-items-center mt-5">
-                <div class="spinner-border text-warning" role="status"></div>
+            <div className='d-flex justify-content-center align-items-center mt-5'>
+                <div class='spinner-border text-warning' role='status'></div>
             </div>
         );
     }
-}
+};
 
 export default WeatherDetails;
