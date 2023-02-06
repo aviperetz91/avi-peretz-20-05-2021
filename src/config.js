@@ -1,2 +1,2 @@
 export const BASE_URL = 'https://dataservice.accuweather.com';
-export const API_KEY = 'LgzOIIf7gEIgrl8ZIJfr6dyfQIewfRcA';
+export const API_KEY = process.env.REACT_APP_API_KEY;
